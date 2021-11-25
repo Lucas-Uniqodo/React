@@ -1,12 +1,14 @@
 // Product.js
 
+import { Image } from './Image.js'
+
 export const Product = (props) => {
-    const { productId, name, description, features, stockLevel, images, price, addedToCart} = props.product
+    const { productId, name, description, features, stockLevel, images, price, addedToCart, quantity} = props.product
 
     return (
         <article className="product">
             <h3>{name}</h3>
-            {images.map(image => <img src={image.imageSrc} />)}
+            {images.map(image => <Image image={image} stockLevel={stockLevel}/>)}
             <p>
                 {description}
             </p>
@@ -18,9 +20,9 @@ export const Product = (props) => {
                 <a className="button--anchor">
                 Full Details
                 </a>        
-                <button>
-                Add to cart
-                </button>
+                <button onClick={() => { props.addToCart(props.product) }}>
+                    Add to cart
+                </button> {quantity}
             </div>            
         </article>
     )
